@@ -52,6 +52,7 @@ public class Player {
             totalValue += playerCards.get(i).getValue();
 
             System.out.println((i + 1) +  ") " + value + " of " + playerCards.get(i).getType());
+            System.out.println("Total : " + totalValue);
         }
         System.out.println("\n");
     }

@@ -12,11 +12,11 @@ public class Main {
     private static List<Card> deck;
     private static Player player;
     private static Dealer dealer;
+    private static boolean gameOver = false;
+    private static boolean tableStarted = false;
 
     public static void main(String[] args) {
-        boolean gameOver = false;
         int playerMove;
-        boolean tableStarted = false;
         int tableMove;
 
         System.out.println("Welcome to my very first Blackjack game made using Java SDK 8! Enjoy! \n - helloryantg \n \n");
@@ -85,6 +85,7 @@ public class Main {
 
                 switch (tableMove) {
                     case 0: // exit
+                        tableStarted = false;
                         gameOver = true;
                         delayCode(200);
                         System.out.println("Leaving the table. Thanks for playing!");
@@ -96,16 +97,41 @@ public class Main {
 
             }
         }
-
-
-
-//        Card firstDraw = drawCard();
-//        System.out.println(firstDraw.printValue());
-
-//        Card secondDraw = drawCard();
-//        System.out.println(secondDraw.printValue());
         scanner.close();
     }
+
+    public static void checkForwinner(List<Card> cards, Player player) {
+        int totalValue = 0;
+
+        for (int i = 0 ; i < cards.size(); i++) {
+            totalValue += cards.get(i).getValue();
+        }
+
+        if (totalValue == 21) {
+            System.out.println(player.getName() + " wins!!");
+            gameOver = true;
+        } else if (totalValue > 21) {
+            System.out.println(player.getName() + " busted! lose");
+            gameOver = true;
+        }
+    }
+
+    public static void checkForwinner(List<Card> cards, Dealer dealer) {
+        int totalValue = 0;
+
+        for (int i = 0 ; i < cards.size(); i++) {
+            totalValue += cards.get(i).getValue();
+        }
+
+        if (totalValue == 21) {
+            System.out.println(dealer.getName() + " wins!!");
+            gameOver = true;
+        } else if (totalValue > 21) {
+            System.out.println(dealer.getName() + " busted! lose");
+            gameOver = true;
+        }
+    }
+
 
     public static void initializeCards() {
 
