@@ -61,6 +61,10 @@ public class Card {
         return secondaryName;
     }
 
+    public String printValue() {
+        return Integer.toString(getValue()) + " of " + getType();
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Card{");

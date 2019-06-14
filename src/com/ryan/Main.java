@@ -13,10 +13,13 @@ public class Main {
         initializeCards();
 //        printCards();
         shuffleCards();
-        printCards();
+//        printCards();
 
+        Card firstDraw = drawCard();
+        System.out.println(firstDraw.printValue());
 
-        System.out.println(drawCard().toString());
+        Card secondDraw = drawCard();
+        System.out.println(secondDraw.printValue());
 
     }
 
@@ -69,7 +72,7 @@ public class Main {
 
     public static Card drawCard() {
         if (!deck.isEmpty()) {
-            return deck.get(0);
+            return deck.remove(0);
         } else {
             return null;
         }
