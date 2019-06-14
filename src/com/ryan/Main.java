@@ -27,6 +27,7 @@ public class Main {
         delayCode(1000);
 
         player = new Player(playerName);
+        dealer = new Dealer();
         System.out.println("Hello " + player.getName() + ", let's play! \n");
         delayCode(200);
 
@@ -70,11 +71,16 @@ public class Main {
                     dealer.addDealerCard(fourthDraw);
                     delayCode(200);
 
+                    player.showPlayerCards();
+                    dealer.showDealerCards();
+
                     tableStarted = true;
             }
 
             while (tableStarted) {
 
+                System.out.println("What's your move?");
+                System.out.println("'1' to hit, '2' to stand, '3' to double, '0' to exit");
                 tableMove = scanner.nextInt();
 
                 switch (tableMove) {

@@ -1,5 +1,6 @@
 package com.ryan;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -11,6 +12,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.cash = 1000;
+        playerCards = new ArrayList<Card>();
     }
 
     public Player(String name, int cash) {
@@ -32,18 +34,25 @@ public class Player {
     }
 
     public List<Card> getPlayerCards() { return playerCards; }
-    public void addPlayerCard(Card card) {
+    public void addPlayerCard(Card card) { playerCards.add(card); }
+    public void showPlayerCards() {
+        System.out.println("Player's Cards");
 
-        String value;
-        String type;
+        int totalValue = 0;
 
-        if ((card.getValue() > 10) || (card.getValue() == 1)) {
-            value = card.getSecondaryName();
-        } else {
-            value = Integer.toString(card.getValue());
+        for (int i = 0; i < playerCards.size(); i++) {
+
+            int cardValue = playerCards.get(i).getValue();
+            String value = Integer.toString(cardValue);
+
+            if (cardValue > 10 || cardValue == 1) {
+                value = playerCards.get(i).getSecondaryName();
+            }
+
+            totalValue += playerCards.get(i).getValue();
+
+            System.out.println((i + 1) +  ") " + value + " of " + playerCards.get(i).getType());
         }
-        type = card.getType();
-
-        System.out.println("Player received a " + value + " of " + type);
+        System.out.println("\n");
     }
 }
