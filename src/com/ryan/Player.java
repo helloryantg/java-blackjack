@@ -33,7 +33,17 @@ public class Player {
 
     public List<Card> getPlayerCards() { return playerCards; }
     public void addPlayerCard(Card card) {
-        System.out.println("Player received a " + card.getValue() + " of " + card.getType());
-        getPlayerCards().add(card);
+
+        String value;
+        String type;
+
+        if ((card.getValue() > 10) || (card.getValue() == 1)) {
+            value = card.getSecondaryName();
+        } else {
+            value = Integer.toString(card.getValue());
+        }
+        type = card.getType();
+
+        System.out.println("Player received a " + value + " of " + type);
     }
 }

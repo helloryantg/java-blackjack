@@ -11,6 +11,7 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Card> deck;
     private static Player player;
+    private static Dealer dealer;
 
     public static void main(String[] args) {
         boolean gameOver = false;
@@ -27,16 +28,11 @@ public class Main {
 
         player = new Player(playerName);
         System.out.println("Hello " + player.getName() + ", let's play! \n");
-
-        initializeCards();
-        shuffleCards();
-
-        // print instructions here
+        delayCode(200);
 
         // User actions start here
         while (!gameOver) {
-            System.out.println("What do you want to do?");
-            System.out.println("Press 1 to start the game. \nPress 0 to exit.");
+            System.out.println("What do you want to do? '1' to start, '0' to exit");
 
             while (!scanner.hasNext()) {
                 System.out.println("Key must be valid");
@@ -54,10 +50,26 @@ public class Main {
                     break;
                 case 1: // begin
                     System.out.println("Starting the game");
+
+                    initializeCards();
+                    shuffleCards();
+
                     Card firstDraw = drawCard();
-                    System.out.println(firstDraw.toString());
                     player.addPlayerCard(firstDraw);
-                    delayCode(400);
+                    delayCode(200);
+
+                    Card secondDraw = drawCard();
+                    dealer.addDealerCard(secondDraw);
+                    delayCode(200);
+
+                    Card thirdDraw = drawCard();
+                    player.addPlayerCard(thirdDraw);
+                    delayCode(200);
+
+                    Card fourthDraw = drawCard();
+                    dealer.addDealerCard(fourthDraw);
+                    delayCode(200);
+
                     tableStarted = true;
             }
 
@@ -146,7 +158,7 @@ public class Main {
 
     public static Card drawCard() {
         if (!deck.isEmpty()) {
-            return deck.remove(0);
+            return deck.remove(deck.size() - 1);
         } else {
             return null;
         }
