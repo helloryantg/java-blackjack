@@ -8,32 +8,85 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+    private static Scanner scanner = new Scanner(System.in);
     private static List<Card> deck;
+    private static Player player;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        boolean gameOver = false;
+        int playerMove;
+        boolean tableStarted = false;
+        int tableMove;
 
         System.out.println("Welcome to my very first Blackjack game made using Java SDK 8! Enjoy! \n - helloryantg \n \n");
 
         System.out.println("First, what is your name?");
         String playerName = scanner.nextLine();
 
-        delayCode(2000);
+        delayCode(1000);
 
-        System.out.println("Hello " + playerName + ", let's play! \n");
+        player = new Player(playerName);
+        System.out.println("Hello " + player.getName() + ", let's play! \n");
 
         initializeCards();
         shuffleCards();
 
-        System.out.println("Begin?");
+        // print instructions here
+
         // User actions start here
+        while (!gameOver) {
+            System.out.println("What do you want to do?");
+            System.out.println("Press 1 to start the game. \nPress 0 to exit.");
+
+            while (!scanner.hasNext()) {
+                System.out.println("Key must be valid");
+                System.out.println("\nWhat do you want to do? [1] for help");
+                scanner.next();
+            }
+
+            playerMove = scanner.nextInt();
+
+            switch (playerMove) {
+                case 0: // end the game;
+                    gameOver = true;
+                    delayCode(400);
+                    System.out.println("Ending the game. Thanks for playing!");
+                    break;
+                case 1: // begin
+                    System.out.println("Starting the game");
+                    Card firstDraw = drawCard();
+                    System.out.println(firstDraw.toString());
+                    player.addPlayerCard(firstDraw);
+                    delayCode(400);
+                    tableStarted = true;
+            }
+
+            while (tableStarted) {
+
+                tableMove = scanner.nextInt();
+
+                switch (tableMove) {
+                    case 0: // exit
+                        gameOver = true;
+                        delayCode(200);
+                        System.out.println("Leaving the table. Thanks for playing!");
+                        break;
+                    case 1: // HIT
+
+
+                }
+
+            }
+        }
+
+
 
 //        Card firstDraw = drawCard();
 //        System.out.println(firstDraw.printValue());
 
 //        Card secondDraw = drawCard();
 //        System.out.println(secondDraw.printValue());
-
+        scanner.close();
     }
 
     public static void initializeCards() {
@@ -106,7 +159,5 @@ public class Main {
         } catch(InterruptedException e) {
             System.out.println("Somehow got interrupted!");
         }
-
-
     }
 }
