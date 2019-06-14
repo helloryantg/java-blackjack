@@ -34,21 +34,29 @@ public class Dealer {
         System.out.println("Dealer's Cards");
 
         int totalValue = 0;
+        int secondaryValue = 0;
 
         for (int i = 0; i < dealerCards.size(); i++) {
 
             int cardValue = dealerCards.get(i).getValue();
             String value = Integer.toString(cardValue);
 
-            if (cardValue > 10 || cardValue == 1) {
+            if (cardValue > 10) {
                 value = dealerCards.get(i).getSecondaryName();
+            } else if (cardValue == 1) {
+                value = dealerCards.get(i).getSecondaryName();
+                totalValue += dealerCards.get(i).getSecondaryValue() - 1;
             }
 
             totalValue += dealerCards.get(i).getValue();
 
-            System.out.println((i + 1) + ") " + value + " of " + dealerCards.get(i).getType());
-            System.out.println("Total : " + totalValue);
+            System.out.println((i + 1) +  ") " + value + " of " + dealerCards.get(i).getType());
         }
+        System.out.println("Total : " + totalValue);
+        if (secondaryValue != 0) {
+            System.out.println("\t or " + secondaryValue);
+        }
+
         System.out.println("\n");
     }
 }

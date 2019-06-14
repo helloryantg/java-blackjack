@@ -19,7 +19,7 @@ public class Main {
         int playerMove;
         int tableMove;
 
-        System.out.println("Welcome to my very first Blackjack game made using Java SDK 8! Enjoy! \n - helloryantg \n \n");
+        System.out.println("Welcome to my very first Blackjack game made using Java SDK 8! Enjoy! \n - helloryantg \n");
 
         System.out.println("First, what is your name?");
         String playerName = scanner.nextLine();
@@ -33,7 +33,9 @@ public class Main {
 
         // User actions start here
         while (!gameOver) {
-            System.out.println("What do you want to do? '1' to start, '0' to exit");
+            System.out.println("What do you want to do?");
+            System.out.println("\t'1' to begin");
+            System.out.println("\t'0' to exit");
 
             while (!scanner.hasNext()) {
                 System.out.println("Key must be valid");
@@ -74,13 +76,19 @@ public class Main {
                     player.showPlayerCards();
                     dealer.showDealerCards();
 
+                    checkForwinner(player.getPlayerCards(), player);
+                    checkForwinner(dealer.getDealerCards(), dealer);
+
                     tableStarted = true;
             }
 
             while (tableStarted) {
 
                 System.out.println("What's your move?");
-                System.out.println("'1' to hit, '2' to stand, '3' to double, '0' to exit");
+                System.out.println("\t'1' to hit");
+                System.out.println("\t'2' to stand");
+                System.out.println("\t'3' to double");
+
                 tableMove = scanner.nextInt();
 
                 switch (tableMove) {
@@ -91,8 +99,12 @@ public class Main {
                         System.out.println("Leaving the table. Thanks for playing!");
                         break;
                     case 1: // HIT
-
-
+                        Card drawnCard = drawCard();
+                        player.addPlayerCard(drawnCard);
+                        player.showPlayerCards();
+                        checkForwinner(player.getPlayerCards(), player);
+                        break;
+                    case 2: // STAND
                 }
 
             }

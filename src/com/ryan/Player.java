@@ -39,21 +39,29 @@ public class Player {
         System.out.println("Player's Cards");
 
         int totalValue = 0;
+        int secondaryValue = 0;
 
         for (int i = 0; i < playerCards.size(); i++) {
 
             int cardValue = playerCards.get(i).getValue();
             String value = Integer.toString(cardValue);
 
-            if (cardValue > 10 || cardValue == 1) {
+            if (cardValue > 10) {
                 value = playerCards.get(i).getSecondaryName();
+            } else if (cardValue == 1) {
+                value = playerCards.get(i).getSecondaryName();
+                totalValue += playerCards.get(i).getSecondaryValue() - 1;
             }
 
             totalValue += playerCards.get(i).getValue();
 
             System.out.println((i + 1) +  ") " + value + " of " + playerCards.get(i).getType());
-            System.out.println("Total : " + totalValue);
         }
+        System.out.println("Total : " + totalValue);
+        if (secondaryValue != 0) {
+            System.out.println("\t or " + secondaryValue);
+        }
+
         System.out.println("\n");
     }
 }
