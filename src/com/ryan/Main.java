@@ -35,6 +35,7 @@ public class Main {
         while (!gameOver) {
             System.out.println("What do you want to do?");
             System.out.println("\t'1' to begin");
+            System.out.println("\t'2' to bet");
             System.out.println("\t'0' to exit");
 
             while (!scanner.hasNext()) {
@@ -52,7 +53,7 @@ public class Main {
                     System.out.println("Ending the game. Thanks for playing!");
                     break;
                 case 1: // begin
-                    System.out.println("Starting the game");
+                    System.out.println("Starting the game...\n");
 
                     initializeCards();
                     shuffleCards();
@@ -76,18 +77,20 @@ public class Main {
                     player.showPlayerCards();
                     dealer.showDealerCards();
 
+                    tableStarted = true;
+
                     checkForwinner(player.getPlayerCards(), player);
                     checkForwinner(dealer.getDealerCards(), dealer);
-
-                    tableStarted = true;
+                case 2: // BET
+                    break;
             }
 
             while (tableStarted) {
 
                 System.out.println("What's your move?");
-                System.out.println("\t'1' to hit");
-                System.out.println("\t'2' to stand");
-                System.out.println("\t'3' to double");
+                System.out.println("'1' hit");
+                System.out.println("'2' stand");
+                System.out.println("'3' double");
 
                 tableMove = scanner.nextInt();
 
@@ -105,6 +108,9 @@ public class Main {
                         checkForwinner(player.getPlayerCards(), player);
                         break;
                     case 2: // STAND
+                        break;
+                    case 3: // DOUBLE
+                        break;
                 }
 
             }
@@ -122,9 +128,11 @@ public class Main {
         if (totalValue == 21) {
             System.out.println(player.getName() + " wins!!");
             gameOver = true;
+            tableStarted = false;
         } else if (totalValue > 21) {
-            System.out.println(player.getName() + " busted! lose");
+            System.out.println(player.getName() + " busted! You lose :( ");
             gameOver = true;
+            tableStarted = false;
         }
     }
 
@@ -138,9 +146,11 @@ public class Main {
         if (totalValue == 21) {
             System.out.println(dealer.getName() + " wins!!");
             gameOver = true;
+            tableStarted = false;
         } else if (totalValue > 21) {
-            System.out.println(dealer.getName() + " busted! lose");
+            System.out.println(dealer.getName() + " busted! You lose :( ");
             gameOver = true;
+            tableStarted = false;
         }
     }
 
@@ -175,8 +185,7 @@ public class Main {
 
             }
         }
-
-        delayCode(2000);
+        delayCode(1000);
     }
 
     public static void printCards() {
@@ -197,7 +206,7 @@ public class Main {
 
         System.out.println("The deck has been shuffled! \n");
 
-        delayCode(2000);
+        delayCode(1000);
     }
 
     public static Card drawCard() {

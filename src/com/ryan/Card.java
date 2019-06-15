@@ -16,12 +16,14 @@ public class Card {
 
         if (value > 10) {
             this.isFaceCard = true;
+            this.value = 10;
         } else {
             this.isFaceCard = false;
         }
 
         if (value == 1) {
-            this.secondaryValue = 11;
+            this.value = 11;
+            this.secondaryValue = 1;
             this.secondaryName = "Ace";
         }
 
@@ -36,30 +38,16 @@ public class Card {
         }
     }
 
-    public int getValue() {
-        return value;
-    }
+    public int getValue() { return value; }
+    public String getType() { return type; }
 
-    public String getType() {
-        return type;
-    }
+    public String getColor() { return color; }
 
-    public String getColor() {
-        return color;
-    }
+    public boolean isFaceCard() { return isFaceCard; }
 
-    public boolean isFaceCard() {
-        return isFaceCard;
-    }
+    public int getSecondaryValue() { return secondaryValue; }
 
-    public int getSecondaryValue() {
-        return secondaryValue;
-    }
-
-    public String getSecondaryName() {
-
-        return secondaryName;
-    }
+    public String getSecondaryName() { return secondaryName; }
 
     public String printValue() {
         return Integer.toString(getValue()) + " of " + getType();

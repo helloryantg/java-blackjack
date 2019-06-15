@@ -50,13 +50,29 @@ public class Dealer {
 
             totalValue += dealerCards.get(i).getValue();
 
-            System.out.println((i + 1) +  ") " + value + " of " + dealerCards.get(i).getType());
+            if (totalValue > 21) {
+                if (dealerCards.contains("Ace")) {
+                    totalValue -= 10;
+                }
+            }
+
+            System.out.println("\t" + (i + 1) +  ") " + value + " of " + dealerCards.get(i).getType());
+            delayCode(200);
         }
-        System.out.println("Total : " + totalValue);
+        System.out.println("\tTotal : " + totalValue);
         if (secondaryValue != 0) {
             System.out.println("\t or " + secondaryValue);
         }
 
         System.out.println("\n");
+    }
+
+    public void delayCode(int milliseconds) {
+        // This delays the printing of the player name
+        try {
+            Thread.sleep(milliseconds);
+        } catch(InterruptedException e) {
+            System.out.println("Somehow got interrupted!");
+        }
     }
 }
