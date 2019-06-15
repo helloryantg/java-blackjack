@@ -119,18 +119,16 @@ public class Main {
     }
 
     public static void checkForwinner(List<Card> cards, Player player) {
-        int totalValue = 0;
-
-        for (int i = 0 ; i < cards.size(); i++) {
-            totalValue += cards.get(i).getValue();
-        }
-
-        if (totalValue == 21) {
+        if (player.getCardTotal() > 21) {
+            if (cards.contains("Ace")) {
+                player.setCardTotal(player.getCardTotal() - 10);
+            } else {
+                System.out.println(player.getName() + " busted! You lose :( ");
+                gameOver = true;
+                tableStarted = false;
+            }
+        } else if (player.getCardTotal() == 21) {
             System.out.println(player.getName() + " wins!!");
-            gameOver = true;
-            tableStarted = false;
-        } else if (totalValue > 21) {
-            System.out.println(player.getName() + " busted! You lose :( ");
             gameOver = true;
             tableStarted = false;
         }

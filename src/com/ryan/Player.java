@@ -42,6 +42,7 @@ public class Player {
     public List<Card> getPlayerCards() { return playerCards; }
     public void addPlayerCard(Card card) { playerCards.add(card); }
     public void showPlayerCards() {
+        cardTotal = 0;
         System.out.println("Player's Cards");
 
         int secondaryValue = 0;
@@ -51,7 +52,7 @@ public class Player {
             int cardValue = playerCards.get(i).getValue();
             String value = Integer.toString(cardValue);
 
-            cardTotal += playerCards.get(i).getValue();
+            setCardTotal(cardTotal += playerCards.get(i).getValue());
 
             if (cardValue > 10) {
                 value = playerCards.get(i).getSecondaryName();
@@ -62,10 +63,8 @@ public class Player {
             System.out.println("\t" + (i + 1) +  ") " + value + " of " + playerCards.get(i).getType());
             delayCode(200);
         }
-
         System.out.println("\tTotal : " + cardTotal);
         System.out.println("\n");
-        cardTotal = 0;
     }
 
     public void delayCode(int milliseconds) {
